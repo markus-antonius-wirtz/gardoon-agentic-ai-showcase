@@ -46,14 +46,14 @@ const PARALLEL_NODES: NodeMeta[] = [
     id: 'retrieve_pine_docs',
     title: '2a. Pine v5 Docs RAG',
     role: 'Dense 3072d + BM25 -> RRF',
-    patternBadge: 'Parallel Track A',
+    patternBadge: 'Track A',
     icon: <Database className="w-4 h-4" />,
   },
   {
     id: 'retrieve_risk_policies',
-    title: '2b. Risk & Repainting RAG',
+    title: '2b. Risk Policy RAG',
     role: 'MiFID & Audit Standards RRF',
-    patternBadge: 'Parallel Track B',
+    patternBadge: 'Track B',
     icon: <Database className="w-4 h-4" />,
   },
 ];

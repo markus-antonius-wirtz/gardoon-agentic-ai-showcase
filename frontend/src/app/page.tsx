@@ -194,7 +194,12 @@ export default function ShowcasePage() {
 
           if (payload.trace) {
             const step: TraceStep = payload.trace;
-            setTraces((prev) => [...prev, step]);
+            setTraces((prev) => {
+              const next = [...prev, step];
+              const sumLatency = next.reduce((acc, s) => acc + (s.latency_ms || 0), 0);
+              setTotalLatencyMs(sumLatency);
+              return next;
+            });
             setTotalCostUsd((prev) => prev + (step.cost_usd_est || 0));
           }
 
@@ -224,9 +229,8 @@ export default function ShowcasePage() {
           setActiveNodes([]);
           setHitlInterrupt(null);
           setFinalReport(payload.report as FinalAuditReport);
-          setTotalLatencyMs(payload.total_latency_ms ?? null);
-          if (typeof payload.total_cost_usd_est === 'number') {
-            setTotalCostUsd(payload.total_cost_usd_est);
+          if (typeof payload.total_latency_ms === 'number') {
+            setTotalLatencyMs((prev) => (prev ?? 0) + payload.total_latency_ms);
           }
         } else if (eventType === 'run_error') {
           setActiveNodes([]);
