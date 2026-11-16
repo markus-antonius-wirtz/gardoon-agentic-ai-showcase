@@ -1,0 +1,74 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    restart: unless-stopped
+    volumes:
+      - qdrant_data:/qdrant/storage
+    expose:
+      - "6333"
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gardoon
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gardoon_showcase_pw}
+      POSTGRES_DB: agent_checkpoints
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gardoon -d agent_checkpoints"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      POSTGRES_DSN: postgresql://gardoon:${POSTGRES_PASSWORD:-gardoon_showcase_pw}@postgres:5432/agent_checkpoints
+      K8S_NAMESPACE: ${K8S_NAMESPACE:-gardoon-ai-prod}
+      K8S_POD_NAME: ${K8S_POD_NAME:-gardoon-orchestrator-eu-01}
+      K8S_NODE_NAME: ${K8S_NODE_NAME:-eu-central-worker-01}
+      CLUSTER_TOPOLOGY: ${CLUSTER_TOPOLOGY:-docker-compose}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      INTERNAL_API_ORIGIN: http://backend:8000
+    depends_on:
+      - backend
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-8026}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  qdrant_data:
+  postgres_data:

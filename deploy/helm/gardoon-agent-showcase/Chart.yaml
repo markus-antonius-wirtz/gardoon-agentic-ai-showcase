@@ -1,0 +1,10 @@
+apiVersion: v2
+name: gardoon-agent-showcase
+description: Production Helm chart for Gardoon Ltd. Multi-Agent LangGraph & Qdrant Hybrid Vector Studio
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+maintainers:
+  - name: Gardoon Ltd.
+    email: info@gardoon.ltd
+    url: https://gardoon.ltd

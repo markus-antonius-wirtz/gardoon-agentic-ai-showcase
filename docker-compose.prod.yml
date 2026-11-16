@@ -1,0 +1,21 @@
+services:
+  backend:
+    environment:
+      APP_ENV: production
+      K8S_NAMESPACE: gardoon-ai-prod
+      K8S_POD_NAME: gardoon-agent-orchestrator-prod-1
+      K8S_NODE_NAME: ubuntu-eu-central-1
+      CLUSTER_TOPOLOGY: shared-net-reverse-proxy
+
+  nginx:
+    container_name: gardoon-agents-nginx
+    ports:
+      - "8026:80"
+    networks:
+      - default
+      - shared-net
+
+networks:
+  default:
+  shared-net:
+    external: true

@@ -1,0 +1,54 @@
+namespace: gardoon-ai-prod
+
+backend:
+  image:
+    repository: ghcr.io/gardoon-ltd/agent-showcase-backend
+    tag: "1.0.0"
+    pullPolicy: IfNotPresent
+  replicas: 2
+  resources:
+    requests:
+      cpu: 250m
+      memory: 384Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  models:
+    fast: gemini-2.5-flash
+    reasoning: gemini-2.5-pro
+    embedding: models/gemini-embedding-001
+  rateLimitPerHour: 15
+
+frontend:
+  image:
+    repository: ghcr.io/gardoon-ltd/agent-showcase-frontend
+    tag: "1.0.0"
+    pullPolicy: IfNotPresent
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+qdrant:
+  image: qdrant/qdrant:v1.12.5
+  storageSize: 5Gi
+
+postgres:
+  image: postgres:16-alpine
+  storageSize: 5Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 70
+
+ingress:
+  enabled: true
+  className: nginx
+  host: agents.gardoon.ltd
+  tlsSecretName: agents-gardoon-ltd-tls
