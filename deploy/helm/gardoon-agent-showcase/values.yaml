@@ -2,7 +2,7 @@ namespace: gardoon-ai-prod
 
 backend:
   image:
-    repository: ghcr.io/gardoon-ltd/agent-showcase-backend
+    repository: ghcr.io/markus-antonius-wirtz/gardoon-agent-showcase-backend
     tag: "1.0.0"
     pullPolicy: IfNotPresent
   replicas: 2
@@ -21,7 +21,7 @@ backend:
 
 frontend:
   image:
-    repository: ghcr.io/gardoon-ltd/agent-showcase-frontend
+    repository: ghcr.io/markus-antonius-wirtz/gardoon-agent-showcase-frontend
     tag: "1.0.0"
     pullPolicy: IfNotPresent
   replicas: 2

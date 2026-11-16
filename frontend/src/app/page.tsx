@@ -417,6 +417,16 @@ export default function ShowcasePage() {
             )}
 
             <a
+              href="https://github.com/markus-antonius-wirtz/gardoon-agentic-ai-showcase"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-xs font-medium text-slate-200 transition"
+            >
+              <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+              GitHub &amp; K8s Helm
+            </a>
+
+            <a
               href="https://tradingtackle.ai"
               target="_blank"
               rel="noreferrer"
@@ -982,6 +992,16 @@ export default function ShowcasePage() {
             — Custom Multi-Agent AI Systems, Hybrid RAG & Cloud-Native SaaS Engineering.
           </div>
           <div className="flex items-center gap-4 font-mono text-[11px]">
+            <a
+              href="https://github.com/markus-antonius-wirtz/gardoon-agentic-ai-showcase"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-xs font-medium text-slate-200 transition"
+            >
+              <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+              GitHub &amp; K8s Helm
+            </a>
+
             <a
               href="https://tradingtackle.ai"
               target="_blank"

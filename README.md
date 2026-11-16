@@ -1,6 +1,7 @@
 # Gardoon Ltd. — Enterprise Multi-Agent AI & Hybrid Vector Reference Architecture
 
 [![Live Showcase](https://img.shields.io/badge/Live_Demo-agents.gardoon.ltd-2563eb?style=for-the-badge)](https://agents.gardoon.ltd)
+[![Enterprise CI](https://img.shields.io/github/actions/workflow/status/markus-antonius-wirtz/gardoon-agentic-ai-showcase/ci.yml?branch=main&style=for-the-badge&label=CI_Pipeline)](https://github.com/markus-antonius-wirtz/gardoon-agentic-ai-showcase/actions)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12_Strict-10b981?style=for-the-badge)](./backend)
 [![LangGraph](https://img.shields.io/badge/LangGraph-StateGraph_%2B_HITL-6366f1?style=for-the-badge)](./backend/app/agents)
 [![Qdrant Hybrid](https://img.shields.io/badge/Qdrant-Dense_%2B_BM25_RRF-06b6d4?style=for-the-badge)](./backend/app/knowledge)
